@@ -1,5 +1,5 @@
-import './index.css';
-import './reset.css';
+import '../index.css';
+import '../reset.css';
 import { createDiv, createTodo } from './object';
 
 const body = document.querySelector('body');

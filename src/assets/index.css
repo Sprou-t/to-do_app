@@ -27,4 +27,31 @@ header{
 .mainContent{
     grid-row: 2/3;
     grid-column: 2/3;
+    display: grid;
+    grid-auto-rows: 35px ;
+}
+
+/* todoDiv and its contents */
+.todoDiv{
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap:18px;
+}
+
+.titlePara{
+    margin-right: auto;
+    margin-left: 20px;
+}
+.detailButton{
+    height: 30px;
+}
+
+.editIcon{
+    height: 20px;
+}
+
+.trashIcon{
+    height: 20px;
+    margin-right: 20px;
 }
