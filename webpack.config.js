@@ -12,6 +12,15 @@ module.exports = {
 // path.resolve is a method provided by Node.js's path module. It's used to resolve/combine a sequence of path segments into an absolute path.
   },
 
+  module: { //tranasfor specific files into specific modules to be imported & used
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  
   plugins: [
     new HtmlWebpackPlugin({
         template: './src/index.html',
