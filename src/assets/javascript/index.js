@@ -12,7 +12,7 @@ sidebar.classList.add('sidebar');
 
 const mainContent = document.createElement('div');
 mainContent.classList.add('mainContent');
-let firstTodo = createTodo('Gym','back workout','friday','high');
+let firstTodo = createTodo('Gym','back workout','friday','High');
 let firstTodoDiv = createDiv(firstTodo);
 mainContent.appendChild(firstTodoDiv);
 //create a card

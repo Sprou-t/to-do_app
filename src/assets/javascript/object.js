@@ -14,6 +14,7 @@ function createTodo(title,description,dueDate,priority){
 function createDiv(createTodo){
     const todoDiv = document.createElement('div');
     todoDiv.classList.add('todoDiv')
+    
     const titlePara = document.createElement('p');
     titlePara.classList.add('titlePara');
     // const descriptionPara = document.createElement('p');
@@ -23,6 +24,11 @@ function createDiv(createTodo){
     // descriptionPara.textContent = `${createTodo.description}`;
     dueDatePara.textContent = `${createTodo.dueDate}`;
     // priorityPara.textContent =`${createTodo.priority}`
+
+
+    const checkbox = document.createElement('input');
+    checkbox.classList.add('checkbox');
+    checkbox.type = 'checkbox';
 
     const detailButton = document.createElement('button');
     detailButton.classList.add('detailButton');
@@ -36,7 +42,17 @@ function createDiv(createTodo){
     trashIcon.classList.add('trashIcon');
     trashIcon.src = trashCan;
 
-    todoDiv.append(titlePara,detailButton,dueDatePara,editIcon,trashIcon);
+    //add color coding based on priority
+    if(createTodo.priority==='High'){
+        todoDiv.style.borderLeft = '10px solid red'
+    }
+    else if (createTodo.priority==='Medium'){
+        todoDiv.style.borderLeft = '10px solid yellow'
+    }
+    else{
+        todoDiv.style.borderLeft = '10px solid green'
+    }
+    todoDiv.append(checkbox,titlePara,detailButton,dueDatePara,editIcon,trashIcon);
     return todoDiv;
 }
 
