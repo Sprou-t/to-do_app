@@ -1,5 +1,6 @@
 import './index.css';
 import './reset.css';
+import { createDiv, createTodo } from './object';
 
 const body = document.querySelector('body');
 
@@ -11,6 +12,10 @@ sidebar.classList.add('sidebar');
 
 const mainContent = document.createElement('div');
 mainContent.classList.add('mainContent');
+let firstTodo = createTodo('Gym','back workout','friday','high');
+let firstTodoDiv = createDiv(firstTodo);
+mainContent.appendChild(firstTodoDiv);
+//create a card
 
 body.append(header,sidebar,mainContent)
 
