@@ -42,18 +42,35 @@ function createDiv(createTodo){
     trashIcon.classList.add('trashIcon');
     trashIcon.src = trashCan;
 
-    //add color coding based on priority
-    if(createTodo.priority==='High'){
+    todoDiv.append(checkbox,titlePara,detailButton,dueDatePara,editIcon,trashIcon);
+    return todoDiv;
+}
+
+function colorCodingForPriority(colorCoding,todoDiv){
+    
+    if(colorCoding==='High'){
         todoDiv.style.borderLeft = '10px solid red'
     }
-    else if (createTodo.priority==='Medium'){
+    else if (colorCoding==='Medium'){
         todoDiv.style.borderLeft = '10px solid yellow'
     }
     else{
         todoDiv.style.borderLeft = '10px solid green'
     }
-    todoDiv.append(checkbox,titlePara,detailButton,dueDatePara,editIcon,trashIcon);
-    return todoDiv;
 }
 
-export {createTodo,createDiv};
+function todoChecked(checkbox,titlePara,todoDiv){
+    checkbox.addEventListener('click',()=>{
+        if(checkbox.checked == true){
+            titlePara.style.textDecoration = 'line-through';
+            todoDiv.style.opacity = '0.7';
+        }
+        
+        else{
+            titlePara.style.textDecoration = 'none';
+            todoDiv.style.opacity = '1';
+        }
+        
+    })
+}
+export {createTodo,createDiv,colorCodingForPriority,todoChecked};
