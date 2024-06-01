@@ -1,7 +1,7 @@
 import pencilIcon from '../images_n_fonts/pencil.svg';
 import trashCan from '../images_n_fonts/trash.svg';
 
-function createTodo(title,description,dueDate,priority){
+function todoObj(title,description,dueDate,priority){
     let toDOCard = {
         title: title,
         description: description,
@@ -13,18 +13,14 @@ function createTodo(title,description,dueDate,priority){
 
 function createDiv(createTodo){
     const todoDiv = document.createElement('div');
-    todoDiv.classList.add('todoDiv')
-    
+    todoDiv.classList.add('todoDiv');
+
     const titlePara = document.createElement('p');
     titlePara.classList.add('titlePara');
-    // const descriptionPara = document.createElement('p');
-    const dueDatePara = document.createElement('p');
-    // const priorityPara = document.createElement('p');
-    titlePara.textContent=`${createTodo.title}`;
-    // descriptionPara.textContent = `${createTodo.description}`;
-    dueDatePara.textContent = `${createTodo.dueDate}`;
-    // priorityPara.textContent =`${createTodo.priority}`
+    titlePara.textContent = createTodo.title;
 
+    const dueDatePara = document.createElement('p');
+    dueDatePara.textContent = createTodo.dueDate;
 
     const checkbox = document.createElement('input');
     checkbox.classList.add('checkbox');
@@ -32,7 +28,7 @@ function createDiv(createTodo){
 
     const detailButton = document.createElement('button');
     detailButton.classList.add('detailButton');
-    detailButton.textContent = `DETAILS`;
+    detailButton.textContent = 'DETAILS';
 
     const editIcon = document.createElement('img');
     editIcon.classList.add('editIcon');
@@ -42,10 +38,15 @@ function createDiv(createTodo){
     trashIcon.classList.add('trashIcon');
     trashIcon.src = trashCan;
 
-    todoDiv.append(checkbox,titlePara,detailButton,dueDatePara,editIcon,trashIcon);
+    todoDiv.append(checkbox, titlePara, detailButton, dueDatePara, editIcon, trashIcon);
     return todoDiv;
 }
 
+function addTodo(){
+    let addBtn = document.createElement('button').classList.add('addBtn');
+    addBtn.textContent = '+';
+}
+//stylings
 function colorCodingForPriority(colorCoding,todoDiv){
     
     if(colorCoding==='High'){
@@ -73,4 +74,4 @@ function todoChecked(checkbox,titlePara,todoDiv){
         
     })
 }
-export {createTodo,createDiv,colorCodingForPriority,todoChecked};
+export {todoObj,createDiv,colorCodingForPriority,todoChecked};
