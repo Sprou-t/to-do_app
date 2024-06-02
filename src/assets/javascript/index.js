@@ -1,11 +1,9 @@
 import '../index.css';
 import '../reset.css';
 import { createDiv, todoObj,colorCodingForPriority,todoChecked } from './object';
-import { popup_todo } from './popup_forms';
+import {createFormBtn} from './popup_forms';
 
-function createWebpage(){
-    const body = document.querySelector('body');
-
+function createWebpage(body){
     const header = document.createElement('header');
     header.classList.add('header');
     header.textContent = '#TO-DO'
@@ -17,12 +15,16 @@ function createWebpage(){
     const mainContent = document.createElement('div');
     mainContent.classList.add('mainContent');
 
-    body.append(header,sidebar,mainContent);
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper');
+
+    body.append(header,sidebar,mainContent,wrapper);
 }
 
     
 let main = (()=>{
-    createWebpage();
+    const body = document.querySelector('body');
+    createWebpage(body);
 
     let mainContent = document.querySelector('.mainContent');
 
@@ -38,8 +40,8 @@ let main = (()=>{
     let todoDiv = document.querySelector('.todoDiv')
     todoChecked(checkbox,titlePara,todoDiv);
 
-    popup_todo(mainContent);
-
+    let wrapper = document.querySelector('.wrapper');
+    createFormBtn(wrapper,body);
 })();
 
 
