@@ -1,12 +1,19 @@
-function popup_todo(){
-    let popup_div = document.createElement('dialog');
+function popup_todo(mainContent){
+    
+
+    let popupDiv = document.createElement('dialog');
+    popupDiv.classList.add('popupDiv');
     let innerForm = document.createElement('form');
+    innerForm.classList.add('innerForm');
 
     let formTop = document.createElement('div');
-    header.classList.add('formTop');
+    formTop.classList.add('formTop');
 
     //create title and X in header
-    
+    let headerWords = document.createElement('p');
+    headerWords.textContent='Create TODO';
+    formTop.append(headerWords);
+
     let formLeft = document.createElement('div');
     formLeft.classList.add('formLeft');
 
@@ -18,6 +25,10 @@ function popup_todo(){
 
     //create title,details,date,priority and add button in form right
     
+    innerForm.append(formTop,formLeft,formRight);
+    popupDiv.append(innerForm);
+    mainContent.append(popupDiv);
+    popupDiv.showModal();
 }
 
 

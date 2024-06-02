@@ -3,31 +3,43 @@ import '../reset.css';
 import { createDiv, todoObj,colorCodingForPriority,todoChecked } from './object';
 import { popup_todo } from './popup_forms';
 
-const body = document.querySelector('body');
+function createWebpage(){
+    const body = document.querySelector('body');
 
-const header = document.createElement('header');
-header.classList.add('header');
-header.textContent = '#TO-DO'
+    const header = document.createElement('header');
+    header.classList.add('header');
+    header.textContent = '#TO-DO'
 
-const sidebar = document.createElement('div');
-sidebar.classList.add('sidebar');
+    const sidebar = document.createElement('div');
+    sidebar.classList.add('sidebar');
 
 
-const mainContent = document.createElement('div');
-mainContent.classList.add('mainContent');
+    const mainContent = document.createElement('div');
+    mainContent.classList.add('mainContent');
 
-let firstTodo = todoObj('Gym','back workout','friday','High');
-let firstTodoDiv = createDiv(firstTodo);
+    body.append(header,sidebar,mainContent);
+}
 
-let colorCode = colorCodingForPriority(firstTodo.priority,firstTodoDiv);
-mainContent.appendChild(firstTodoDiv);
-//create a card
+    
+let main = (()=>{
+    createWebpage();
 
-body.append(header,sidebar,mainContent)
+    let mainContent = document.querySelector('.mainContent');
 
-let checkbox = document.querySelector('.checkbox');
-let titlePara = document.querySelector('.titlePara');
-let todoDiv = document.querySelector('.todoDiv')
-todoChecked(checkbox,titlePara,todoDiv);
+    let firstTodo = todoObj('Gym','back workout','friday','High');
+    let firstTodoDiv = createDiv(firstTodo);
+
+    let colorCode = colorCodingForPriority(firstTodo.priority,firstTodoDiv);
+    mainContent.appendChild(firstTodoDiv); //create a card
+    
+
+    let checkbox = document.querySelector('.checkbox');
+    let titlePara = document.querySelector('.titlePara');
+    let todoDiv = document.querySelector('.todoDiv')
+    todoChecked(checkbox,titlePara,todoDiv);
+
+    popup_todo(mainContent);
+
+})();
 
 
