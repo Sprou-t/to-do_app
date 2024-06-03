@@ -10,7 +10,7 @@ function popup_todo(body){
 
     //create title and X in header
     let headerWords = document.createElement('p');
-    headerWords.textContent='Create TODO';
+    headerWords.textContent='CREATE NEW TODO...';
     let closeBtn = document.createElement('button');
     closeBtn.textContent = 'X';
     closeBtn.classList.add('closeBtn');  
@@ -24,11 +24,20 @@ function popup_todo(body){
     //create general and edit in form left
 
     let formRight = document.createElement('div');
-    formRight.classList.add('formRIght');
-    formRight.textContent = 'RIGHT'
-
+    formRight.classList.add('formRight');
     //create title,details,date,priority and add button in form right
-    
+    let titleDiv = document.createElement('textarea');
+    titleDiv.placeholder = 'Title: eg. Pay bills'
+    let detailDiv = document.createElement('textarea');
+    detailDiv.placeholder='Details: eg. internet,phone,rent'
+    let dateDiv = document.createElement('div');
+    dateDiv.textContent = 'Due Date: '
+    let priorityDiv = document.createElement('div');
+    priorityDiv.textContent = 'Priority:'
+
+    formRight.append(titleDiv,detailDiv,dateDiv,priorityDiv);
+
+
     popupForm.append(formTop,formLeft,formRight);
     formDiv.append(popupForm);
     body.append(formDiv);
