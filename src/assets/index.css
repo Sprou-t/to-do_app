@@ -117,7 +117,6 @@ header{
     z-index: 10;
     box-shadow: 0 0 30px black;
     border-radius: 5px;
-    
 }
 
 .formTop{
@@ -154,6 +153,22 @@ header{
     grid-column: 1/2;
     background-color: #eff6ff;
     border-bottom-left-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.formLeft input{
+    background-color: #eff6ff;
+    width: 90%;
+    border: none;
+    outline: none;
+}
+
+.formLeft input:hover{
+    transform: scale(1.01);
+    font-weight: 800;
+    cursor: pointer;
 }
 
 .formRight{
@@ -197,4 +212,52 @@ header{
     border-radius:10px ;
     outline: none;
     /* removes the black highlight when focus is on btn */
+}
+
+.priorityDiv{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* style all the priority buttons */
+.priorityDiv button:nth-child(2){
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+    color: #16a34a;
+    border:#16a34a 1px solid ;
+    border-radius:5px ;
+    outline: none;
+}
+
+.priorityDiv button:nth-child(3){
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+    color: #f97316;
+    border:#f97316 1px solid ;
+    border-radius:5px ;
+    outline: none;
+}
+
+.priorityDiv button:nth-child(4){
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+    color: red;
+    border:red 1px solid ;
+    border-radius:5px ;
+    outline: none;
+    margin-right: 100px;
+}
+
+.priorityDiv button:nth-child(5){
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+    color: #0ac04d;
+    border:#0ac04d 1px solid ;
+    border-radius:5px ;
+    outline: none;
 }

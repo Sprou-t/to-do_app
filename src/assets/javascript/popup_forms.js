@@ -18,7 +18,9 @@ function popup_todo(body){
 
     let formLeft = document.createElement('div');
     formLeft.classList.add('formLeft');
-    formLeft.textContent = 'LEFT';
+    let tagPara = document.createElement('input');
+    tagPara.placeholder = 'Tag?'
+    formLeft.append(tagPara);
 
 
     //create general and edit in form left
@@ -44,8 +46,18 @@ function popup_todo(body){
     dateDiv.append(dateLabel,dateBtn);
 
     let priorityDiv = document.createElement('div');
-    priorityDiv.textContent = 'Priority:'
-
+    priorityDiv.classList.add('priorityDiv');
+    let priorityLabel = document.createElement('p');
+    priorityLabel.textContent = 'Priority:'
+    let lowPriorityBtn = document.createElement('button');
+    lowPriorityBtn.textContent = 'Low'
+    let mediumPriorityBtn = document.createElement('button');
+    mediumPriorityBtn.textContent = 'Medium'
+    let highPriorityBtn = document.createElement('button');
+    highPriorityBtn.textContent = 'High';
+    let addNewTodoBtn = document.createElement('button');
+    addNewTodoBtn.textContent= 'Create';
+    priorityDiv.append(priorityLabel,lowPriorityBtn,mediumPriorityBtn,highPriorityBtn,addNewTodoBtn);
     formRight.append(titleDiv,detailDiv,dateDiv,priorityDiv);
 
 
