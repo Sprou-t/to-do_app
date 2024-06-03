@@ -85,6 +85,23 @@ header{
     margin-right: 20px;
 }
 
+.addBtn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 3.2rem;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, #5b21b6,#a855f7);
+}
+
 
 .popupForm{
     position: absolute;
