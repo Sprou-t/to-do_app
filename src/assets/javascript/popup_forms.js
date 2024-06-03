@@ -28,10 +28,21 @@ function popup_todo(body){
     //create title,details,date,priority and add button in form right
     let titleDiv = document.createElement('textarea');
     titleDiv.placeholder = 'Title: eg. Pay bills'
+
     let detailDiv = document.createElement('textarea');
     detailDiv.placeholder='Details: eg. internet,phone,rent'
+
     let dateDiv = document.createElement('div');
-    dateDiv.textContent = 'Due Date: '
+    dateDiv.classList.add('dateDiv');
+    let dateLabel = document.createElement('p');
+    dateLabel.textContent = 'Due Date:'
+    let dateBtn = document.createElement('input');
+    dateBtn.type = 'date';
+    dateBtn.classList.add('dateBtn');
+    dateBtn.setAttribute('id','todoDateFromDateBtn');
+    dateBtn.setAttribute('name','todoDateFromDateBtn');
+    dateDiv.append(dateLabel,dateBtn);
+
     let priorityDiv = document.createElement('div');
     priorityDiv.textContent = 'Priority:'
 
