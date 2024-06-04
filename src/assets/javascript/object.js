@@ -56,7 +56,7 @@ function colorCodingForPriority(colorCoding,todoDiv){
         todoDiv.style.borderLeft = '10px solid red'
     }
     else if (colorCoding==='Medium'){
-        todoDiv.style.borderLeft = '10px solid yellow'
+        todoDiv.style.borderLeft = '10px solid orange'
     }
     else{
         todoDiv.style.borderLeft = '10px solid green'

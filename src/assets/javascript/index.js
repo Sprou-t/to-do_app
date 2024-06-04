@@ -36,10 +36,10 @@ let main = (()=>{
     let checkbox = document.querySelector('.checkbox');
     let titlePara = document.querySelector('.titlePara');
     let todoDiv = document.querySelector('.todoDiv')
-    todoChecked(checkbox,titlePara,todoDiv);
+    todoChecked(checkbox,titlePara,todoDiv);//implements strikethrough effect if a todo is checked
 
     let wrapper = document.querySelector('.wrapper');
-    createFormAndTodoObj(wrapper,body,createDiv);
+    createFormAndTodoObj(wrapper,body,createDiv); //creates a form once user submits inputs
 })();
 
 

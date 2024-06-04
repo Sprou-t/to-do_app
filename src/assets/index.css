@@ -77,8 +77,9 @@ header{
 }
 
 .dueDatePara{
+    font-size: 0.9rem;
     margin-left: 40px;
-    width: 82px;
+    width: 103px;
     display: flex;
     text-align: center;
 }

@@ -1,4 +1,4 @@
-import { todoObj,createDiv } from "./object";
+import { todoObj,createDiv ,colorCodingForPriority} from "./object";
 import { parse,format } from "date-fns";
 
 function popup_todo(body){
@@ -140,9 +140,9 @@ function createFormAndTodoObj(wrapper,body,createDiv){
             let dateValue = document.querySelector('.dateBtn').value;
             let convertedDateValue = formatDate(dateValue);
             let tagValue = document.querySelector('.tagPara');
-            let todoObject = todoObj(titleValue,detailValue,convertedDateValue,previousButtonValue,tagValue)
-            createDiv(todoObject);
-             
+            let todoObject = todoObj(titleValue,detailValue,convertedDateValue,previousButtonValue,tagValue);
+//line below executes 2 functions to create the object div as well as to color code it
+            colorCodingForPriority(previousButtonValue,createDiv(todoObject));
             formDiv.remove();
             wrapper.style.display = 'none';
         })
