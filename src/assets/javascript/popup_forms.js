@@ -96,20 +96,41 @@ function createFormAndTodoObj(wrapper,body){
         let detail = document.querySelector('.detailDiv').value;
         let date = document.querySelector('.dateBtn').value;
         let lowPriorityBtn = document.querySelector('.lowPriorityBtn');
-        lowPriorityBtn.addEventListener('click',()=>{
-            lowPriorityBtn.style.backgroundColor='#16a34a';
-            lowPriorityBtn.style.color='white';
-        })
         let mediumPriorityBtn = document.querySelector('.mediumPriorityBtn');
-        mediumPriorityBtn.addEventListener('click',()=>{
-            mediumPriorityBtn.style.backgroundColor='orange';
-            mediumPriorityBtn.style.color='white';
-        })
         let highPriorityBtn = document.querySelector('.highPriorityBtn');
-        highPriorityBtn.addEventListener('click',()=>{
-            highPriorityBtn.style.backgroundColor='red';
-            highPriorityBtn.style.color='white';
-        })
+        
+
+        let priorityDiv = document.querySelector('.priorityDiv');
+        let previousButton;//variable to remove previous priority button's styling
+        priorityDiv.addEventListener('click', (e) => {
+            let target = e.target;
+            // Check if the clicked target is a button with a priority class
+            if (target.classList.contains('lowPriorityBtn') || 
+                target.classList.contains('mediumPriorityBtn') || 
+                target.classList.contains('highPriorityBtn')) {
+        
+                // If there was a previously clicked button, reset its styles
+                if (previousButton) {
+                    previousButton.style.backgroundColor = ''; // Reset background color
+                    previousButton.style.color = ''; // Reset text color
+                }
+        
+                // Apply new styles to the clicked button
+                if (target.classList.contains('lowPriorityBtn')) {
+                    target.style.backgroundColor = '#16a34a';
+                    target.style.color = 'white';
+                } else if (target.classList.contains('mediumPriorityBtn')) {
+                    target.style.backgroundColor = 'orange';
+                    target.style.color = 'white';
+                } else if (target.classList.contains('highPriorityBtn')) {
+                    target.style.backgroundColor = 'red';
+                    target.style.color = 'white';
+                }
+        
+                // Update the previously clicked button reference
+                previousButton = target;
+            }
+        });
         addNewTodoBtn.addEventListener('click',()=>{
 
         })
