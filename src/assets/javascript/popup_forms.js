@@ -1,4 +1,4 @@
-import { todoObj } from "./object";
+import { todoObj,createDiv } from "./object";
 
 function popup_todo(body){
     let formDiv = document.createElement('div')
@@ -51,6 +51,7 @@ function popup_todo(body){
     dateBtn.setAttribute('name','todoDateFromDateBtn');
     dateDiv.append(dateLabel,dateBtn);
 
+    //create the priority section
     let priorityDiv = document.createElement('div');
     priorityDiv.classList.add('priorityDiv');
     let priorityLabel = document.createElement('p');
@@ -76,7 +77,9 @@ function popup_todo(body){
     body.append(formDiv);
 }
 
-function createFormAndTodoObj(wrapper,body){
+//creates form when + button clicked, allows user to close form when X clicked  
+//and allows users to submit their input and create todo Objects
+function createFormAndTodoObj(wrapper,body,createDiv){
     let addBtn = document.createElement('button');
     addBtn.textContent = '+';
     addBtn.classList.add('addBtn');
@@ -84,24 +87,15 @@ function createFormAndTodoObj(wrapper,body){
     addBtn.addEventListener('click',(e)=>{
         e.preventDefault();
         popup_todo(body); //create pop up form
-        wrapper.style.display = 'block';
+        wrapper.style.display = 'block'; //blur out background
         let closeBtn = document.querySelector('.closeBtn');
         let formDiv = document.querySelector('.formDiv');
-        closeForm(closeBtn, formDiv, wrapper);
+        closeForm(closeBtn, formDiv, wrapper); //close background
 
         //create obj from form inputs if user clicks 'create'
-        //collect elements
-        let addNewTodoBtn = document.querySelector('.addNewTodo');
-        let title = document.querySelector('.titleDiv').value;
-        let detail = document.querySelector('.detailDiv').value;
-        let date = document.querySelector('.dateBtn').value;
-        let lowPriorityBtn = document.querySelector('.lowPriorityBtn');
-        let mediumPriorityBtn = document.querySelector('.mediumPriorityBtn');
-        let highPriorityBtn = document.querySelector('.highPriorityBtn');
-        
-
         let priorityDiv = document.querySelector('.priorityDiv');
         let previousButton;//variable to remove previous priority button's styling
+        let previousButtonValue;
         priorityDiv.addEventListener('click', (e) => {
             let target = e.target;
             // Check if the clicked target is a button with a priority class
@@ -119,23 +113,37 @@ function createFormAndTodoObj(wrapper,body){
                 if (target.classList.contains('lowPriorityBtn')) {
                     target.style.backgroundColor = '#16a34a';
                     target.style.color = 'white';
+                    previousButtonValue = 'Low';
                 } else if (target.classList.contains('mediumPriorityBtn')) {
                     target.style.backgroundColor = 'orange';
                     target.style.color = 'white';
+                    previousButtonValue = 'Medium';
                 } else if (target.classList.contains('highPriorityBtn')) {
                     target.style.backgroundColor = 'red';
                     target.style.color = 'white';
+                    previousButtonValue = 'High';
                 }
         
                 // Update the previously clicked button reference
                 previousButton = target;
             }
         });
-        addNewTodoBtn.addEventListener('click',()=>{
-
+        //collect elements
+        
+        
+        document.querySelector('.addNewTodo').addEventListener('click', (e) => {
+            e.preventDefault();
+            //add the values obtained from the pop up form to the todo obj
+            let titleValue = document.querySelector('.titleDiv').value;
+            let detailValue = document.querySelector('.detailDiv').value;
+            let dateValue = document.querySelector('.dateBtn').value;
+            let tagValue = document.querySelector('.tagPara');
+            let todoObject = todoObj(titleValue,detailValue,dateValue,previousButtonValue,tagValue)
+            createDiv(todoObject);
+             
+            formDiv.remove();
+            wrapper.style.display = 'none';
         })
-        turnInputIntoObj()
-
     })
 }
 
@@ -147,8 +155,5 @@ function closeForm(closeBtn, formDiv, wrapper){
     })
 }
 
-function turnInputIntoObj(){
-    //submit user input and create a todo Obj
 
-}
 export {popup_todo,createFormAndTodoObj};

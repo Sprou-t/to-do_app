@@ -1,26 +1,28 @@
 import pencilIcon from '../images_n_fonts/pencil.svg';
 import trashCan from '../images_n_fonts/trash.svg';
-
-function todoObj(title,description,dueDate,priority){
+//creates the obj
+function todoObj(title,detail,dueDate,priority,tag){
     let toDOCard = {
         title: title,
-        description: description,
+        detail: detail,
         dueDate: dueDate,
-        priority:priority
+        priority:priority,
+        tag:tag
     }
     return toDOCard;
 }
 
-function createDiv(createTodo){
+//appends the details of the object to the webpage
+function createDiv(todoObj){
     const todoDiv = document.createElement('div');
     todoDiv.classList.add('todoDiv');
 
     const titlePara = document.createElement('p');
     titlePara.classList.add('titlePara');
-    titlePara.textContent = createTodo.title;
+    titlePara.textContent = todoObj.title;
 
     const dueDatePara = document.createElement('p');
-    dueDatePara.textContent = createTodo.dueDate;
+    dueDatePara.textContent = todoObj.dueDate;
 
     const checkbox = document.createElement('input');
     checkbox.classList.add('checkbox');
@@ -39,14 +41,14 @@ function createDiv(createTodo){
     trashIcon.src = trashCan;
 
     todoDiv.append(checkbox, titlePara, detailButton, dueDatePara, editIcon, trashIcon);
+    
+    // Append the new todoDiv to the main content
+    document.querySelector('.mainContent').appendChild(todoDiv);
     return todoDiv;
 }
 
-function addTodo(){
-    let addBtn = document.createElement('button').classList.add('addBtn');
-    addBtn.textContent = '+';
-}
-//stylings
+
+//styles the object based on priority values
 function colorCodingForPriority(colorCoding,todoDiv){
     
     if(colorCoding==='High'){
@@ -60,6 +62,7 @@ function colorCodingForPriority(colorCoding,todoDiv){
     }
 }
 
+//adds the checkbox to each todo object
 function todoChecked(checkbox,titlePara,todoDiv){
     checkbox.addEventListener('click',()=>{
         if(checkbox.checked == true){
