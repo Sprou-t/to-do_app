@@ -47,7 +47,7 @@ header{
     display: flex;
     align-items: center;
     margin: auto;
-    gap:18px;
+    gap:20px;
     background-color:white;
     border-radius: 10px;
     height: 30px;
@@ -76,6 +76,12 @@ header{
     align-items: center;
 }
 
+.dueDatePara{
+    margin-left: 40px;
+    width: 82px;
+    display: flex;
+    text-align: center;
+}
 .editIcon{
     height: 20px;
 }

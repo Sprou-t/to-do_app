@@ -1,4 +1,5 @@
 import { todoObj,createDiv } from "./object";
+import { parse,format } from "date-fns";
 
 function popup_todo(body){
     let formDiv = document.createElement('div')
@@ -137,8 +138,9 @@ function createFormAndTodoObj(wrapper,body,createDiv){
             let titleValue = document.querySelector('.titleDiv').value;
             let detailValue = document.querySelector('.detailDiv').value;
             let dateValue = document.querySelector('.dateBtn').value;
+            let convertedDateValue = formatDate(dateValue);
             let tagValue = document.querySelector('.tagPara');
-            let todoObject = todoObj(titleValue,detailValue,dateValue,previousButtonValue,tagValue)
+            let todoObject = todoObj(titleValue,detailValue,convertedDateValue,previousButtonValue,tagValue)
             createDiv(todoObject);
              
             formDiv.remove();
@@ -155,5 +157,16 @@ function closeForm(closeBtn, formDiv, wrapper){
     })
 }
 
+const formatDate = (dateString) => {
+    // Parse the date string into a Date object
+    const parsedDate = parse(dateString, 'yyyy-MM-dd', new Date());
+  
+    // Format the date into "DD MMMM"
+    const formattedDate = format(parsedDate, 'dd MMMM, eee');
+  
+    return formattedDate;
+  }
 
+  var result = parse('02/11/2014', 'MM/dd/yyyy', new Date())
+//=> Tue Feb 11 2014 00:00:00
 export {popup_todo,createFormAndTodoObj};

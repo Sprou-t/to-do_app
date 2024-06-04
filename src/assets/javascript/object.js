@@ -23,6 +23,7 @@ function createDiv(todoObj){
 
     const dueDatePara = document.createElement('p');
     dueDatePara.textContent = todoObj.dueDate;
+    dueDatePara.classList.add('dueDatePara');
 
     const checkbox = document.createElement('input');
     checkbox.classList.add('checkbox');
