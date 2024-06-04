@@ -212,6 +212,7 @@ header{
     border-radius:10px ;
     outline: none;
     /* removes the black highlight when focus is on btn */
+    text-align: center;
 }
 
 .priorityDiv{
@@ -251,6 +252,7 @@ header{
     outline: none;
     margin-right: 100px;
 }
+
 
 .priorityDiv button:nth-child(5){
     appearance: none;

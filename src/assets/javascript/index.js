@@ -1,7 +1,7 @@
 import '../index.css';
 import '../reset.css';
 import { createDiv, todoObj,colorCodingForPriority,todoChecked } from './object';
-import {createFormBtn} from './popup_forms';
+import {createFormAndTodoObj} from './popup_forms';
 
 function createWebpage(body){
     const header = document.createElement('header');
@@ -41,7 +41,7 @@ let main = (()=>{
     todoChecked(checkbox,titlePara,todoDiv);
 
     let wrapper = document.querySelector('.wrapper');
-    createFormBtn(wrapper,body);
+    createFormAndTodoObj(wrapper,body);
 })();
 
 
