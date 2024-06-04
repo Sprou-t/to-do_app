@@ -159,14 +159,14 @@ function closeForm(closeBtn, formDiv, wrapper){
 
 const formatDate = (dateString) => {
     // Parse the date string into a Date object
+    //the pattern (found in the docs) basically tells parse what pattern dateString has to which parse will process and turn into an obj
     const parsedDate = parse(dateString, 'yyyy-MM-dd', new Date());
   
-    // Format the date into "DD MMMM"
+    // Format the date into "DD MMMM, Month in alphabets "
     const formattedDate = format(parsedDate, 'dd MMMM, eee');
   
     return formattedDate;
   }
 
-  var result = parse('02/11/2014', 'MM/dd/yyyy', new Date())
-//=> Tue Feb 11 2014 00:00:00
+  
 export {popup_todo,createFormAndTodoObj};
