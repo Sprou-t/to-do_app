@@ -1,4 +1,4 @@
-import { todoObj,createDiv ,colorCodingForPriority} from "./object";
+import { todoObj ,colorCodingForPriority, showTodoDetails} from "./object";
 import { parse,format } from "date-fns";
 
 function popup_todo(body){
@@ -85,7 +85,7 @@ function createFormAndTodoObj(wrapper,body,createDiv){
     addBtn.textContent = '+';
     addBtn.classList.add('addBtn');
     body.append(addBtn);
-    addBtn.addEventListener('click',(e)=>{
+    addBtn.addEventListener('click',(e)=>{ //creates a form to let user give i/ps
         e.preventDefault();
         popup_todo(body); //create pop up form
         wrapper.style.display = 'block'; //blur out background
@@ -131,10 +131,9 @@ function createFormAndTodoObj(wrapper,body,createDiv){
         });
         //collect elements
         
-        
+//add the values obtained from the pop up form to the todo obj when create button clicked
         document.querySelector('.addNewTodo').addEventListener('click', (e) => {
             e.preventDefault();
-            //add the values obtained from the pop up form to the todo obj
             let titleValue = document.querySelector('.titleDiv').value;
             let detailValue = document.querySelector('.detailDiv').value;
             let dateValue = document.querySelector('.dateBtn').value;
@@ -145,6 +144,9 @@ function createFormAndTodoObj(wrapper,body,createDiv){
             colorCodingForPriority(previousButtonValue,createDiv(todoObject));
             formDiv.remove();
             wrapper.style.display = 'none';
+
+//allows user to open up detail form for each detail object when detail button clicked
+            showTodoDetails(titleValue,detailValue,previousButtonValue,convertedDateValue,tagValue);
         })
     })
 }
@@ -169,4 +171,4 @@ const formatDate = (dateString) => {
   }
 
   
-export {popup_todo,createFormAndTodoObj};
+export {popup_todo,createFormAndTodoObj,formatDate};

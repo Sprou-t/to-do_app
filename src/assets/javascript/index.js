@@ -1,6 +1,6 @@
 import '../index.css';
 import '../reset.css';
-import { createDiv, todoObj,colorCodingForPriority,todoChecked } from './object';
+import { createIndividualTodoItem, todoObj,colorCodingForPriority,todoChecked, showTodoDetails} from './object';
 import {createFormAndTodoObj} from './popup_forms';
 
 function createWebpage(body){
@@ -29,17 +29,18 @@ let main = (()=>{
     let mainContent = document.querySelector('.mainContent');
 
     let firstTodo = todoObj('Gym','back workout','friday','High','health');
-    let firstTodoDiv = createDiv(firstTodo);
-
+    let firstTodoDiv = createIndividualTodoItem(firstTodo);
     let colorCode = colorCodingForPriority(firstTodo.priority,firstTodoDiv);
 
+    
     let checkbox = document.querySelector('.checkbox');
     let titlePara = document.querySelector('.titlePara');
     let todoDiv = document.querySelector('.todoDiv')
     todoChecked(checkbox,titlePara,todoDiv);//implements strikethrough effect if a todo is checked
 
     let wrapper = document.querySelector('.wrapper');
-    createFormAndTodoObj(wrapper,body,createDiv); //creates a form once user submits inputs
+    createFormAndTodoObj(wrapper,body,createIndividualTodoItem); //creates a form once user submits inputs
+    
 })();
 
 

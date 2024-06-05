@@ -1,5 +1,6 @@
 import pencilIcon from '../images_n_fonts/pencil.svg';
 import trashCan from '../images_n_fonts/trash.svg';
+
 //creates the obj
 function todoObj(title,detail,dueDate,priority,tag){
     let toDOCard = {
@@ -13,7 +14,8 @@ function todoObj(title,detail,dueDate,priority,tag){
 }
 
 //appends the details of the object to the webpage
-function createDiv(todoObj){
+//this object has event listener that listens for detail button, edit,checkbox and remove
+function createIndividualTodoItem(todoObj){
     const todoDiv = document.createElement('div');
     todoDiv.classList.add('todoDiv');
 
@@ -45,6 +47,15 @@ function createDiv(todoObj){
     
     // Append the new todoDiv to the main content
     document.querySelector('.mainContent').appendChild(todoDiv);
+
+    // Add event listener for the detail button
+    detailButton.addEventListener('click', () => {
+        showTodoDetails(todoObj.title, todoObj.detail, todoObj.priority, todoObj.dueDate, todoObj.tag);
+    });
+
+    // Call todoChecked to add the event listener for the checkbox
+    todoChecked(checkbox, titlePara, todoDiv);
+
     return todoDiv;
 }
 
@@ -75,7 +86,47 @@ function todoChecked(checkbox,titlePara,todoDiv){
             titlePara.style.textDecoration = 'none';
             todoDiv.style.opacity = '1';
         }
-        
     })
 }
-export {todoObj,createDiv,colorCodingForPriority,todoChecked};
+
+//opens up a form to show the details inside
+function showTodoDetails(title,detail,priority,dueDate,tag){
+    let body = document.querySelector('body');
+
+    function createDetailsForm(title,detail,priority,dueDate,tag){
+        //create form
+        let detailForm = document.createElement('div');
+        detailForm.classList.add('detailForm');
+        let firstRow = document.createElement('div');
+        let titlePara = document.createElement('h3');
+        titlePara.textContent = title;
+        let closeBtn = document.createElement('button');
+        closeBtn.textContent = 'x';
+        firstRow.append(titlePara,closeBtn);
+        let secondRow = document.createElement('p');
+        secondRow.textContent = `Project: ${detail}`;
+        let thirdRow = document.createElement('p');
+        thirdRow.textContent = `Priority: ${priority}`;
+        let fourthRow = document.createElement('p');
+        fourthRow.textContent = `Due Date: ${dueDate}`;
+        let tagRow = document.createElement('p');
+        tagRow.textContent = `Tag: ${tag}`;
+        detailForm.append(firstRow,secondRow,thirdRow,firstRow,tagRow);
+        body.append(detailForm);
+    
+        //add styling to detailForm
+        detailForm.style.position = 'absolute';
+        detailForm.style.top = '40%';
+        detailForm.style.left = '40%';
+    }
+//when details button clicked, a form opens up to which the values from the form inputs are injected here
+    //add eventListener to detail button
+    document.querySelector('.detailButton').addEventListener('click',() =>{
+        createDetailsForm(title,detail,priority,dueDate,tag);//create detail form
+
+    })
+}
+//edits the object using the form
+
+//remove the object
+export {todoObj,createIndividualTodoItem,colorCodingForPriority,todoChecked,showTodoDetails};
