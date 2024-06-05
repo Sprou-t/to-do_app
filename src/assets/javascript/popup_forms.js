@@ -1,7 +1,7 @@
 import { todoObj ,colorCodingForPriority, showTodoDetails} from "./object";
 import { parse,format } from "date-fns";
 
-function popup_todo(body){
+function createPopupFormForTodoItemCreation(body){
     let formDiv = document.createElement('div')
     formDiv.classList.add('formDiv')
     let popupForm = document.createElement('form');
@@ -87,7 +87,7 @@ function createFormAndTodoObj(wrapper,body,createDiv){
     body.append(addBtn);
     addBtn.addEventListener('click',(e)=>{ //creates a form to let user give i/ps
         e.preventDefault();
-        popup_todo(body); //create pop up form
+        createPopupFormForTodoItemCreation(body); //create pop up form
         wrapper.style.display = 'block'; //blur out background
         let closeBtn = document.querySelector('.closeBtn');
         let formDiv = document.querySelector('.formDiv');
@@ -138,7 +138,7 @@ function createFormAndTodoObj(wrapper,body,createDiv){
             let detailValue = document.querySelector('.detailDiv').value;
             let dateValue = document.querySelector('.dateBtn').value;
             let convertedDateValue = formatDate(dateValue);
-            let tagValue = document.querySelector('.tagPara');
+            let tagValue = document.querySelector('.tagPara').value;
             let todoObject = todoObj(titleValue,detailValue,convertedDateValue,previousButtonValue,tagValue);
 //line below executes 2 functions to create the object div as well as to color code it
             colorCodingForPriority(previousButtonValue,createDiv(todoObject));
@@ -146,7 +146,7 @@ function createFormAndTodoObj(wrapper,body,createDiv){
             wrapper.style.display = 'none';
 
 //allows user to open up detail form for each detail object when detail button clicked
-            showTodoDetails(titleValue,detailValue,previousButtonValue,convertedDateValue,tagValue);
+            showTodoDetails(titleValue,detailValue,previousButtonValue,convertedDateValue,tagValue,wrapper);
         })
     })
 }
@@ -171,4 +171,4 @@ const formatDate = (dateString) => {
   }
 
   
-export {popup_todo,createFormAndTodoObj,formatDate};
+export {createPopupFormForTodoItemCreation,createFormAndTodoObj,formatDate};

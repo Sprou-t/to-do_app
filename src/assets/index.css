@@ -270,3 +270,30 @@ header{
     border-radius:5px ;
     outline: none;
 }
+
+/* style detail form */
+.detailForm{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255,255,255);
+    width: 55ch;
+    padding: 10px;
+    z-index: 20;
+    border-radius: 5px;
+}
+
+.detailForm > div:first-child{
+    display: flex;
+    justify-content: space-between; /* This replaces gap to ensure proper spacing */
+}
+
+.titlePara{
+    width: 40ch;
+}
+
+.detailForm button{
+    height: 30px;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+}

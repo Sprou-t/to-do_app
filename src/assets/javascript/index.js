@@ -28,18 +28,10 @@ let main = (()=>{
 
     let mainContent = document.querySelector('.mainContent');
 
-    let firstTodo = todoObj('Gym','back workout','friday','High','health');
-    let firstTodoDiv = createIndividualTodoItem(firstTodo);
-    let colorCode = colorCodingForPriority(firstTodo.priority,firstTodoDiv);
-
-    
-    let checkbox = document.querySelector('.checkbox');
-    let titlePara = document.querySelector('.titlePara');
-    let todoDiv = document.querySelector('.todoDiv')
-    todoChecked(checkbox,titlePara,todoDiv);//implements strikethrough effect if a todo is checked
-
     let wrapper = document.querySelector('.wrapper');
-    createFormAndTodoObj(wrapper,body,createIndividualTodoItem); //creates a form once user submits inputs
+    createFormAndTodoObj(wrapper,body,createIndividualTodoItem); 
+    //creates a form once user submits inputs AND also has color coding effect
+    
     
 })();
 

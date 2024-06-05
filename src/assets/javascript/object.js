@@ -76,6 +76,7 @@ function colorCodingForPriority(colorCoding,todoDiv){
 
 //adds the checkbox to each todo object
 function todoChecked(checkbox,titlePara,todoDiv){
+    
     checkbox.addEventListener('click',()=>{
         if(checkbox.checked == true){
             titlePara.style.textDecoration = 'line-through';
@@ -90,40 +91,41 @@ function todoChecked(checkbox,titlePara,todoDiv){
 }
 
 //opens up a form to show the details inside
-function showTodoDetails(title,detail,priority,dueDate,tag){
+function showTodoDetails(title,detail,priority,dueDate,tag,wrapper){
     let body = document.querySelector('body');
-
+    
     function createDetailsForm(title,detail,priority,dueDate,tag){
         //create form
         let detailForm = document.createElement('div');
         detailForm.classList.add('detailForm');
         let firstRow = document.createElement('div');
         let titlePara = document.createElement('h3');
-        titlePara.textContent = title;
+        titlePara.classList.add('titlePara');
+        titlePara.textContent = `Title: ${title}`;
         let closeBtn = document.createElement('button');
         closeBtn.textContent = 'x';
         firstRow.append(titlePara,closeBtn);
         let secondRow = document.createElement('p');
-        secondRow.textContent = `Project: ${detail}`;
+        secondRow.textContent = `Detail: ${detail}`;
         let thirdRow = document.createElement('p');
         thirdRow.textContent = `Priority: ${priority}`;
         let fourthRow = document.createElement('p');
         fourthRow.textContent = `Due Date: ${dueDate}`;
         let tagRow = document.createElement('p');
         tagRow.textContent = `Tag: ${tag}`;
-        detailForm.append(firstRow,secondRow,thirdRow,firstRow,tagRow);
+        detailForm.append(firstRow,secondRow,thirdRow,fourthRow,tagRow);
         body.append(detailForm);
     
         //add styling to detailForm
         detailForm.style.position = 'absolute';
-        detailForm.style.top = '40%';
-        detailForm.style.left = '40%';
+        detailForm.style.top = '30%';
+        detailForm.style.left = '30%';
     }
 //when details button clicked, a form opens up to which the values from the form inputs are injected here
     //add eventListener to detail button
     document.querySelector('.detailButton').addEventListener('click',() =>{
         createDetailsForm(title,detail,priority,dueDate,tag);//create detail form
-
+        wrapper.style.display = 'block'; //blur out background
     })
 }
 //edits the object using the form
