@@ -40,6 +40,7 @@ function createIndividualTodoItem(todoObj){
     editIcon.src = pencilIcon;
 
     const trashIcon = document.createElement('img');
+    trashIcon.style.cursor = 'pointer';
     trashIcon.classList.add('trashIcon');
     trashIcon.src = trashCan;
 
@@ -55,6 +56,11 @@ function createIndividualTodoItem(todoObj){
 
     // Call todoChecked to add the event listener for the checkbox
     todoChecked(checkbox, titlePara, todoDiv);
+
+    //Add event Listener for rubbish button/icon
+    trashIcon.addEventListener('click',()=>{
+        todoDiv.remove();
+    })
 
     return todoDiv;
 }
@@ -91,44 +97,47 @@ function todoChecked(checkbox,titlePara,todoDiv){
 }
 
 //opens up a form to show the details inside
-function showTodoDetails(title,detail,priority,dueDate,tag,wrapper){
-    let body = document.querySelector('body');
-    
-    function createDetailsForm(title,detail,priority,dueDate,tag){
-        //create form
-        let detailForm = document.createElement('div');
-        detailForm.classList.add('detailForm');
-        let firstRow = document.createElement('div');
-        let titlePara = document.createElement('h3');
-        titlePara.classList.add('titlePara');
-        titlePara.textContent = `Title: ${title}`;
-        let closeBtn = document.createElement('button');
-        closeBtn.textContent = 'x';
-        firstRow.append(titlePara,closeBtn);
-        let secondRow = document.createElement('p');
-        secondRow.textContent = `Detail: ${detail}`;
-        let thirdRow = document.createElement('p');
-        thirdRow.textContent = `Priority: ${priority}`;
-        let fourthRow = document.createElement('p');
-        fourthRow.textContent = `Due Date: ${dueDate}`;
-        let tagRow = document.createElement('p');
-        tagRow.textContent = `Tag: ${tag}`;
-        detailForm.append(firstRow,secondRow,thirdRow,fourthRow,tagRow);
-        body.append(detailForm);
-    
-        //add styling to detailForm
-        detailForm.style.position = 'absolute';
-        detailForm.style.top = '30%';
-        detailForm.style.left = '30%';
-    }
+function showTodoDetails(title,detail,priority,dueDate,tag){
+    let wrapper =  document.querySelector('.wrapper');
 //when details button clicked, a form opens up to which the values from the form inputs are injected here
     //add eventListener to detail button
-    document.querySelector('.detailButton').addEventListener('click',() =>{
         createDetailsForm(title,detail,priority,dueDate,tag);//create detail form
         wrapper.style.display = 'block'; //blur out background
-    })
+        document.querySelector('.closeBtnForDetailForm').addEventListener('click',()=>{
+            document.querySelector('.detailForm').remove();
+            wrapper.style.display = 'none';
+        })
+    
 }
-//edits the object using the form
+//create the details form when user clicks the detail button
+function createDetailsForm(title,detail,priority,dueDate,tag){
+    let body = document.querySelector('body');
+    //create form
+    let detailForm = document.createElement('div');
+    detailForm.classList.add('detailForm');
+    let firstRow = document.createElement('div');
+    let titlePara = document.createElement('h3');
+    titlePara.classList.add('titlePara');
+    titlePara.textContent = `Title: ${title}`;
+    let closeBtn = document.createElement('button');
+    closeBtn.textContent = 'x';
+    closeBtn.classList.add('closeBtnForDetailForm');
+    firstRow.append(titlePara,closeBtn);
+    let secondRow = document.createElement('p');
+    secondRow.textContent = `Detail: ${detail}`;
+    let thirdRow = document.createElement('p');
+    thirdRow.textContent = `Priority: ${priority}`;
+    let fourthRow = document.createElement('p');
+    fourthRow.textContent = `Due Date: ${dueDate}`;
+    let tagRow = document.createElement('p');
+    tagRow.textContent = `Tag: ${tag}`;
+    detailForm.append(firstRow,secondRow,thirdRow,fourthRow,tagRow);
+    body.append(detailForm);
 
+    //add styling to detailForm
+    detailForm.style.position = 'absolute';
+    detailForm.style.top = '30%';
+    detailForm.style.left = '30%';
+}
 //remove the object
 export {todoObj,createIndividualTodoItem,colorCodingForPriority,todoChecked,showTodoDetails};

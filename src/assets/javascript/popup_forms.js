@@ -1,4 +1,4 @@
-import { todoObj ,colorCodingForPriority, showTodoDetails} from "./object";
+import { todoObj ,colorCodingForPriority, createIndividualTodoItem} from "./object";
 import { parse,format } from "date-fns";
 
 function createPopupFormForTodoItemCreation(body){
@@ -124,6 +124,10 @@ function createFormAndTodoObj(wrapper,body,createDiv){
                     target.style.color = 'white';
                     previousButtonValue = 'High';
                 }
+
+                else{
+                    target.style.backgroundColor = 'white';
+                }
         
                 // Update the previously clicked button reference
                 previousButton = target;
@@ -137,16 +141,21 @@ function createFormAndTodoObj(wrapper,body,createDiv){
             let titleValue = document.querySelector('.titleDiv').value;
             let detailValue = document.querySelector('.detailDiv').value;
             let dateValue = document.querySelector('.dateBtn').value;
-            let convertedDateValue = formatDate(dateValue);
+            let convertedDateValue;
+            if (dateValue){
+                convertedDateValue = formatDate(dateValue);
+            }
+            else{
+                convertedDateValue = '';
+            }
+            
             let tagValue = document.querySelector('.tagPara').value;
             let todoObject = todoObj(titleValue,detailValue,convertedDateValue,previousButtonValue,tagValue);
 //line below executes 2 functions to create the object div as well as to color code it
-            colorCodingForPriority(previousButtonValue,createDiv(todoObject));
+            colorCodingForPriority(previousButtonValue,createIndividualTodoItem(todoObject));
             formDiv.remove();
             wrapper.style.display = 'none';
 
-//allows user to open up detail form for each detail object when detail button clicked
-            showTodoDetails(titleValue,detailValue,previousButtonValue,convertedDateValue,tagValue,wrapper);
         })
     })
 }
