@@ -1,7 +1,7 @@
 import '../index.css';
 import '../reset.css';
 import { createIndividualTodoItem, todoObj,colorCodingForPriority,todoChecked, showTodoDetails} from './object';
-import {createFormAndTodoObj} from './popup_forms';
+import {createFormAndTodoObj,filterTodosByTag} from './popup_forms';
 
 function createWebpage(body){
     const header = document.createElement('header');
@@ -22,6 +22,7 @@ function createWebpage(body){
     wrapper.classList.add('wrapper');
 
     body.append(header,sidebar,mainContent,wrapper);
+    filterTodosByTag();
 }
 
     
@@ -32,7 +33,7 @@ let main = (()=>{
     let mainContent = document.querySelector('.mainContent');
 
     let wrapper = document.querySelector('.wrapper');
-    createFormAndTodoObj(wrapper,body,createIndividualTodoItem); 
+    createFormAndTodoObj(wrapper,body); 
     //creates a form once user submits inputs AND also has color coding effect
     
     

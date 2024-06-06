@@ -81,7 +81,7 @@ function createPopupFormForTodoItemCreation(body){
 //creates form when + button clicked, allows user to close form when X clicked  
 //and allows users to submit their input and create todo Objects
 //also add tag buttons to the sidebar
-function createFormAndTodoObj(wrapper,body,createDiv){
+function createFormAndTodoObj(wrapper,body){
     let addBtn = document.createElement('button');
     addBtn.textContent = '+';
     addBtn.classList.add('addBtn');
@@ -175,7 +175,7 @@ function handleTagSubmission(tagCounts,tagValue){
     let sidebar = document.querySelector('.sidebar')
     let tagList = document.querySelectorAll('.todoTag');//selects all the available tag in sidebar
     let newTag;
-    let previousClickedTag;
+    
 
     let adjustedTagValue = tagValue.trim()//remove all whitespaces
     if (adjustedTagValue ===''){
@@ -206,17 +206,38 @@ function handleTagSubmission(tagCounts,tagValue){
         newTag.textContent = `${adjustedTagValue} (${tagCounts[adjustedTagValue]})`;
         sidebar.append(newTag);
     }
-    //add a upscaling styling effect when user clicks
+    
+}
+
+//add a upscaling styling effect when user clicks
+    //and filter out all the other non-selected tags
+let filterTodosByTag = ()=>{
     document.querySelector('.sidebar').addEventListener('click', (e) => {
+        //if user clicks onto any tags/there are tags ald created
         if (e.target.classList.contains('todoTag')) {
-            if (previousClickedTag) {//rempve previously clcked tag's styling effect
+            let previousClickedTag;
+            let Uneditedtag = e.target.textContent; //tag with numbers and ()
+            let tag = Uneditedtag.replace(/\s*\(\d+\)$/, ''); //removes: (numbers)
+            //if user has previously clicked onto any tags
+            if (previousClickedTag) {//remove previously clcked tag's styling effect
                 previousClickedTag.classList.remove('scaled');
             }
             e.target.classList.add('scaled');
             previousClickedTag = e.target;
+
+            let todoDiv = document.querySelectorAll('.todoDiv');
+            todoDiv.forEach(todoItem => {
+            let todoTag = todoItem.dataset.tag; // Access the data-tag attribute
+            if (todoTag === tag || tag === 'General') {
+                todoItem.style.display = 'flex';
+            } else {
+                todoItem.style.display = 'none';
+            }
+    });
         }
     });
 }
+   
 
 function closeForm(closeBtn, formDiv, wrapper){
     closeBtn.addEventListener('click',(e)=>{
@@ -238,4 +259,4 @@ const formatDate = (dateString) => {
   }
 
   
-export {createPopupFormForTodoItemCreation,createFormAndTodoObj,formatDate};
+export {createPopupFormForTodoItemCreation,createFormAndTodoObj,formatDate,filterTodosByTag};

@@ -15,9 +15,10 @@ function todoObj(title,detail,dueDate,priority,tag){
 
 //appends the details of the object to the webpage
 //this object has event listener that listens for detail button, edit,checkbox and remove
-function createIndividualTodoItem(todoObj){
+function createIndividualTodoItem(todoObj){//todoObj rep each todo obj created
     const todoDiv = document.createElement('div');
     todoDiv.classList.add('todoDiv');
+    todoDiv.dataset.tag = todoObj.tag; // Set data-tag attribute to the tag value
 
     const titlePara = document.createElement('p');
     titlePara.classList.add('titlePara');
@@ -107,8 +108,8 @@ function showTodoDetails(title,detail,priority,dueDate,tag){
             document.querySelector('.detailForm').remove();
             wrapper.style.display = 'none';
         })
-    
 }
+
 //create the details form when user clicks the detail button
 function createDetailsForm(title,detail,priority,dueDate,tag){
     let body = document.querySelector('body');
