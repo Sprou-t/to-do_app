@@ -49,6 +49,11 @@ header{
     font-weight: 800;
     margin-top: 10px;
     margin-left: -30px;
+    cursor: pointer;
+}
+
+.todoTag.scaled {
+    transform: scale(1.1);
 }
 
 .mainContent{

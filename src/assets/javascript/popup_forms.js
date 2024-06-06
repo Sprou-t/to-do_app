@@ -157,45 +157,65 @@ function createFormAndTodoObj(wrapper,body,createDiv){
             let todoObject = todoObj(titleValue,detailValue,convertedDateValue,previousButtonValue,tagValue);
 //line below executes 2 functions to create the object div as well as to color code it
             colorCodingForPriority(previousButtonValue,createIndividualTodoItem(todoObject));
- //add the tag to sidebar or increase its counter
-            handleTagSubmission(tagValue);
+            handleTagSubmission(tagCounts,tagValue);
             formDiv.remove();
             wrapper.style.display = 'none';
 
         })
     })
 }
+
+// Declare tagCounts outside the function to persist between calls
+let tagCounts = {};
 //create a function that when user submits the input form, searches the currently available tags
 //if no current tag is found, then a new tag will be appended to sidebar
-function handleTagSubmission(tagValue){
-    let counter; //general counter
+//tagValue is the value that user keys in for tag i/p
+//tagCount is the object that stores the tag key and their occurence numbers
+function handleTagSubmission(tagCounts,tagValue){
     let sidebar = document.querySelector('.sidebar')
     let tagList = document.querySelectorAll('.todoTag');//selects all the available tag in sidebar
-    let newTag = document.createElement('button');
-    let tagExists = false;
+    let newTag;
+    let previousClickedTag;
 
-    let adjustedTagValue = tagValue.trim()
-    if (tagValue ===''){
-        tagValue =  'General';
+    let adjustedTagValue = tagValue.trim()//remove all whitespaces
+    if (adjustedTagValue ===''){
+        adjustedTagValue = 'General';
     }
 
-    // Check if the tag already exists
+   // Initialize the count for the tag if it does not exist in tagCounts
+   if (!tagCounts[adjustedTagValue]) {
+    tagCounts[adjustedTagValue] = 0;
+}
+
+// Check if the tag already exists
+    let tagExists = false;
     tagList.forEach(tag => {
-        if (tag.textContent === adjustedTagValue) {//if it does exist
+        if (tag.textContent.split(' (')[0] === adjustedTagValue) {
+            // If the tag exists, update the counter
+            tagCounts[adjustedTagValue]++;
+            tag.textContent = `${adjustedTagValue} (${tagCounts[adjustedTagValue]})`;
             tagExists = true;
-            
         }
     });
 
     // If the tag does not exist, create and append a new tag
     if (!tagExists) {
-        let newTag = document.createElement('button');
+        newTag = document.createElement('button');
         newTag.classList.add('todoTag');
-        newTag.textContent = tagValue || 'General'; // Default to 'General' if tagValue is empty
+        tagCounts[adjustedTagValue] = 1; // Initialize count for new tag
+        newTag.textContent = `${adjustedTagValue} (${tagCounts[adjustedTagValue]})`;
         sidebar.append(newTag);
-        counter = 0;
     }
-    counter++;
+    //add a upscaling styling effect when user clicks
+    document.querySelector('.sidebar').addEventListener('click', (e) => {
+        if (e.target.classList.contains('todoTag')) {
+            if (previousClickedTag) {//rempve previously clcked tag's styling effect
+                previousClickedTag.classList.remove('scaled');
+            }
+            e.target.classList.add('scaled');
+            previousClickedTag = e.target;
+        }
+    });
 }
 
 function closeForm(closeBtn, formDiv, wrapper){
