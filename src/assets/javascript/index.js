@@ -10,12 +10,15 @@ function createWebpage(body){
 
     const sidebar = document.createElement('div');
     sidebar.classList.add('sidebar');
+    let tagHeading = document.createElement('p');
+    tagHeading.textContent = 'Tags';
+    sidebar.append(tagHeading);
 
 
     const mainContent = document.createElement('div');
     mainContent.classList.add('mainContent');
 
-    const wrapper = document.createElement('div');//actually a blur out filter
+    const wrapper = document.createElement('div');//WRAPPER is a blur out filter
     wrapper.classList.add('wrapper');
 
     body.append(header,sidebar,mainContent,wrapper);

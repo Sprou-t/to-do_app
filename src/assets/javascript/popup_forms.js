@@ -80,6 +80,7 @@ function createPopupFormForTodoItemCreation(body){
 
 //creates form when + button clicked, allows user to close form when X clicked  
 //and allows users to submit their input and create todo Objects
+//also add tag buttons to the sidebar
 function createFormAndTodoObj(wrapper,body,createDiv){
     let addBtn = document.createElement('button');
     addBtn.textContent = '+';
@@ -149,15 +150,52 @@ function createFormAndTodoObj(wrapper,body,createDiv){
                 convertedDateValue = '';
             }
             
-            let tagValue = document.querySelector('.tagPara').value;
+            let tagValue = document.querySelector('.tagPara').value;//refers to the tag data input in the form
+            if(!tagValue){
+                tagValue = 'General'
+            }
             let todoObject = todoObj(titleValue,detailValue,convertedDateValue,previousButtonValue,tagValue);
 //line below executes 2 functions to create the object div as well as to color code it
             colorCodingForPriority(previousButtonValue,createIndividualTodoItem(todoObject));
+ //add the tag to sidebar or increase its counter
+            handleTagSubmission(tagValue);
             formDiv.remove();
             wrapper.style.display = 'none';
 
         })
     })
+}
+//create a function that when user submits the input form, searches the currently available tags
+//if no current tag is found, then a new tag will be appended to sidebar
+function handleTagSubmission(tagValue){
+    let counter; //general counter
+    let sidebar = document.querySelector('.sidebar')
+    let tagList = document.querySelectorAll('.todoTag');//selects all the available tag in sidebar
+    let newTag = document.createElement('button');
+    let tagExists = false;
+
+    let adjustedTagValue = tagValue.trim()
+    if (tagValue ===''){
+        tagValue =  'General';
+    }
+
+    // Check if the tag already exists
+    tagList.forEach(tag => {
+        if (tag.textContent === adjustedTagValue) {//if it does exist
+            tagExists = true;
+            
+        }
+    });
+
+    // If the tag does not exist, create and append a new tag
+    if (!tagExists) {
+        let newTag = document.createElement('button');
+        newTag.classList.add('todoTag');
+        newTag.textContent = tagValue || 'General'; // Default to 'General' if tagValue is empty
+        sidebar.append(newTag);
+        counter = 0;
+    }
+    counter++;
 }
 
 function closeForm(closeBtn, formDiv, wrapper){
