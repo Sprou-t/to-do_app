@@ -166,7 +166,7 @@ function createFormAndTodoObj(wrapper,body){
 }
 
 // Declare tagCounts outside the function to persist between calls
-let tagCounts = {};
+export let tagCounts = {};
 //create a function that when user submits the input form, searches the currently available tags
 //if no current tag is found, then a new tag will be appended to sidebar
 //tagValue is the value that user keys in for tag i/p
@@ -208,14 +208,17 @@ function handleTagSubmission(tagCounts,tagValue){
     }
     
 }
+// Declare previousClickedTag outside the function to ensure it persists between 
+// event listener calls. This allows you to keep track of the previously clicked 
+// tag and remove its styling effect when a new tag is clicked.
+let previousClickedTag;
 
 //add a upscaling styling effect when user clicks
     //and filter out all the other non-selected tags
-let filterTodosByTag = ()=>{
+function filterTodosByTag (){
     document.querySelector('.sidebar').addEventListener('click', (e) => {
         //if user clicks onto any tags/there are tags ald created
         if (e.target.classList.contains('todoTag')) {
-            let previousClickedTag;
             let Uneditedtag = e.target.textContent; //tag with numbers and ()
             let tag = Uneditedtag.replace(/\s*\(\d+\)$/, ''); //removes: (numbers)
             //if user has previously clicked onto any tags

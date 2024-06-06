@@ -1,5 +1,6 @@
 import pencilIcon from '../images_n_fonts/pencil.svg';
 import trashCan from '../images_n_fonts/trash.svg';
+import { tagCounts } from './popup_forms';
 
 //creates the obj
 function todoObj(title,detail,dueDate,priority,tag){
@@ -61,9 +62,36 @@ function createIndividualTodoItem(todoObj){//todoObj rep each todo obj created
     //Add event Listener for rubbish button/icon
     trashIcon.addEventListener('click',()=>{
         todoDiv.remove();
+        updateTagCount(todoObj.tag, -1); // Decrease tag count when todo is removed
+        let tagWithZeroCount = /\(0\)/;
+        let tagList = document.querySelectorAll('.todoTag');
+        tagList.forEach(tagElement => {
+            if (tagElement.textContent.match(tagWithZeroCount)){
+                tagElement.remove();
+            }
+        })
     })
 
     return todoDiv;
+}
+
+// Update tag count when a todo is removed
+function updateTagCount(tag, change) {
+    if (tagCounts[tag]) {
+        tagCounts[tag] += change;
+        updateTagElement(tag);
+    }
+}
+
+// Update the displayed tag count on the sidebar
+function updateTagElement(tag) {
+    let tagList = document.querySelectorAll('.todoTag');
+    tagList.forEach(tagElement => {
+        let tagText = tagElement.textContent.split(' (')[0];
+        if (tagText === tag) {
+            tagElement.textContent = `${tag} (${tagCounts[tag]})`;
+        }
+    });
 }
 
 
